@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -119,7 +118,7 @@ func getMovie(w http.ResponseWriter, r *http.Request) {
 			charID := re.FindAllString(data.CharacterURLs[i], -1)
 			uRl, err := rout.Get("character").URL("character_id", charID[0])
 			if err != nil {
-				fmt.Println(err)
+				log.Fatal(err)
 			}
 			data.CharacterURLs[i] = uRl.String()
 		}
@@ -133,7 +132,7 @@ func getMovie(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(movieID)
 	comments, err := models.GetComments(id)
 	if err != nil {
-		log.Println("error:", err)
+		log.Println(err)
 	}
 	data.Comments = *comments
 
@@ -186,14 +185,13 @@ func getCharacters(w http.ResponseWriter, r *http.Request) {
 			id := re.FindAllString(char.Films[i], -1)[0]
 			uRl, err := rout.Get("movie").URL("movie_id", id)
 			if err != nil {
-				fmt.Println(err)
+				log.Println(err)
 			}
 			char.Films[i] = uRl.String()
 		}
 		id := re.FindAllString(char.URL, -1)[0]
 		y, _ := rout.Get("character").URL("character_id", id)
 		data.URL = y.String()
-		// fmt.Println(y.String())
 		// end of urls
 		chars = append(chars, char)
 	}
@@ -236,7 +234,7 @@ func getCharacter(w http.ResponseWriter, r *http.Request) {
 		id := re.FindAllString(data.Films[i], -1)[0]
 		uRl, err := rout.Get("movie").URL("movie_id", id)
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 		}
 		data.Films[i] = uRl.String()
 	}
@@ -275,7 +273,7 @@ func addComments(w http.ResponseWriter, r *http.Request) {
 
 	a, err := models.NewComment(comment)
 	if err != nil {
-		log.Println("errrrr", err)
+		log.Println(err)
 	}
 
 	utils.MakeResponse(&w, a, true, http.StatusOK)
@@ -298,7 +296,7 @@ func getComments(w http.ResponseWriter, r *http.Request) {
 
 	comments, err := models.GetComments(id)
 	if err != nil {
-		fmt.Println("errr", err)
+		log.Println(err)
 	}
 
 	utils.MakeResponse(&w, comments, true, http.StatusOK)

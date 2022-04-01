@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,7 +15,7 @@ func main() {
 	// @host :{variable} port
 	// @BasePath /
 	port := os.Getenv("PORT")
-	fmt.Println("Running", port)
+	log.Println("Running", port)
 	r := controller.GetRouter()
 
 	srv := &http.Server{
@@ -30,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("exited")
+	log.Println("exited")
 }
 
 // Todo convert urls **

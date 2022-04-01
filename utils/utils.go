@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -25,7 +24,6 @@ func init() {
 	if cachePassword == "" {
 		cachePassword = ""
 	}
-	fmt.Println(cacheHost, cachePassword)
 }
 
 // Fetch helper function to make requests
@@ -65,7 +63,7 @@ func MakeResponse(w *http.ResponseWriter, result interface{}, ok bool, status in
 	}
 	(*w).WriteHeader(status)
 	if err := json.NewEncoder(*w).Encode(response); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
