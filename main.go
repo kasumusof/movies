@@ -13,10 +13,10 @@ import (
 func main() {
 	// @title MOVIES API documentation
 	// @version 1.0.0
-	// @host localhost:3000
+	// @host localhost:{variable} port
 	// @BasePath /
 	port := os.Getenv("PORT")
-	fmt.Println("Running")
+	fmt.Println("Running", port)
 	r := controller.GetRouter()
 
 	srv := &http.Server{
