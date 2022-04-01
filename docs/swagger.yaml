@@ -1,0 +1,260 @@
+basePath: /
+definitions:
+  models.Comment:
+    properties:
+      author:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      movie_id:
+        type: integer
+      text:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  types.Character:
+    properties:
+      birth_year:
+        type: string
+      created:
+        type: string
+      edited:
+        type: string
+      eye_color:
+        type: string
+      films:
+        items:
+          type: string
+        type: array
+      gender:
+        type: string
+      hair_color:
+        type: string
+      height:
+        type: string
+      mass:
+        type: string
+      name:
+        type: string
+      skin_color:
+        type: string
+      url:
+        type: string
+    type: object
+  types.CharacterResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        $ref: '#/definitions/types.Characters'
+    type: object
+  types.Characters:
+    properties:
+      count:
+        type: integer
+      next: {}
+      previous: {}
+      results:
+        items:
+          $ref: '#/definitions/types.Character'
+        type: array
+    type: object
+  types.CharactersResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        $ref: '#/definitions/types.Characters'
+    type: object
+  types.CommentResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        $ref: '#/definitions/models.Comment'
+    type: object
+  types.CommentsResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+    type: object
+  types.Movie:
+    properties:
+      characters:
+        items:
+          type: string
+        type: array
+      comment:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      created:
+        type: string
+      director:
+        type: string
+      edited:
+        type: string
+      episode_id:
+        type: integer
+      opening_crawl:
+        type: string
+      producer:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  types.MovieResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        $ref: '#/definitions/types.Movie'
+    type: object
+  types.Movies:
+    properties:
+      count:
+        type: integer
+      next: {}
+      previous: {}
+      results:
+        items:
+          $ref: '#/definitions/types.Movie'
+        type: array
+    type: object
+  types.MoviesResp:
+    properties:
+      ok:
+        type: boolean
+      result:
+        $ref: '#/definitions/types.Movies'
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  title: MOVIES API documentation
+  version: 1.0.0
+paths:
+  /character/{character_id}/:
+    get:
+      description: get a particular character
+      parameters:
+      - description: Character ID
+        in: path
+        name: character_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.CharacterResp'
+      summary: get a particular character
+      tags:
+      - movies
+  /movies/:
+    get:
+      description: get all movies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.MoviesResp'
+      summary: get all movies
+      tags:
+      - movies
+  /movies/{movie_id}/:
+    get:
+      description: get a particular movies
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.MovieResp'
+      summary: get a particular movies
+      tags:
+      - movies
+  /movies/{movie_id}/characters/{character_id}/:
+    get:
+      description: get all  characters for a particular movie
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      - description: Character ID
+        in: path
+        name: character_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.CharactersResp'
+      summary: get all  characters for a particular movie
+      tags:
+      - movies
+  /movies/{movie_id}/comments/:
+    get:
+      description: get all comments for a movie
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.CommentsResp'
+      summary: get all comments for  a movie
+      tags:
+      - movies
+    post:
+      consumes:
+      - application/json
+      description: add a comment to a movie
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.CommentResp'
+      summary: add a comment to a movie
+      tags:
+      - movies
+swagger: "2.0"

@@ -1,0 +1,7 @@
+create_table("comments") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("author", "string", {})
+	t.Column("movie_id", "integer", {})
+	t.Column("text", "text", {})
+	t.Timestamps()
+}
