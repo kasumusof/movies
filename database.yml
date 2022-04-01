@@ -11,4 +11,4 @@ test:
   url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/movies_test?sslmode=disable"}}
 
 production:
-   url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@27.0.0.1:5432/movies_production"}}
+  url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/movies_production?sslmode=disable"}}
