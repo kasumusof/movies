@@ -1,4 +1,4 @@
-basePath: /
+basePath: /documentation/
 definitions:
   models.Comment:
     properties:
@@ -137,7 +137,7 @@ definitions:
       result:
         $ref: '#/definitions/types.Movies'
     type: object
-host: localhost:8080
+host: :{variable} port
 info:
   contact: {}
   title: MOVIES API documentation

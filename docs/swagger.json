@@ -5,8 +5,8 @@
         "contact": {},
         "version": "1.0.0"
     },
-    "host": "localhost:8080",
-    "basePath": "/",
+    "host": ":{variable} port",
+    "basePath": "/documentation/",
     "paths": {
         "/character/{character_id}/": {
             "get": {
