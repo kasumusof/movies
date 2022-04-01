@@ -2,20 +2,22 @@ package models
 
 import (
 	"encoding/json"
+	"time"
+
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/validate"
-	"github.com/gofrs/uuid"
-	"time"
 	"github.com/gobuffalo/validate/validators"
+	"github.com/gofrs/uuid"
 )
+
 // Comment is used by pop to map your .model.Name.Proper.Pluralize.Underscore database table to your go code.
 type Comment struct {
-    ID uuid.UUID `json:"id" db:"id"`
-    Author string `json:"author" db:"author"`
-    MovieID int `json:"movie_id" db:"movie_id"`
-    Text string `json:"text" db:"text"`
-    CreatedAt time.Time `json:"created_at" db:"created_at"`
-    UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	ID        uuid.UUID `json:"id" db:"id"`
+	Author    string    `json:"author" db:"author"`
+	MovieID   int       `json:"movie_id" db:"movie_id"`
+	Text      string    `json:"text" db:"text"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 }
 
 // NewComment
@@ -29,14 +31,13 @@ func NewComment(comment Comment) (*Comment, error) {
 // GetComments
 func GetComments(movieID int) (*Comments, error) {
 	comment := Comments{}
-	query := tx.Where("movie_id = ?", movieID)
+	query := tx.Where("movie_id = ?", movieID).Order("created_at desc")
 	err := query.All(&comment)
 	if err != nil {
 		return &Comments{}, err
 	}
 	return &comment, nil
 }
-
 
 // String is not required by pop and may be deleted
 func (c Comment) String() string {
