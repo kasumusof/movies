@@ -12,14 +12,14 @@ import (
 func main() {
 	// @title MOVIES API documentation
 	// @version 1.0.0
-	// @host localhost:8080
+	// @host localhost:3000
 	// @BasePath /
 	fmt.Println("Running")
 	r := controller.GetRouter()
 
 	srv := &http.Server{
 		Handler: r,
-		Addr:    "127.0.0.1:8080",
+		Addr:    "127.0.0.1:3000",
 
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
