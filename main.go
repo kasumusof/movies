@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/kasumusof/movies/controller"
@@ -14,12 +15,13 @@ func main() {
 	// @version 1.0.0
 	// @host localhost:3000
 	// @BasePath /
+	port := os.Getenv("PORT")
 	fmt.Println("Running")
 	r := controller.GetRouter()
 
 	srv := &http.Server{
 		Handler: r,
-		Addr:    "127.0.0.1:3000",
+		Addr:    "127.0.0.1:" + port,
 
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
