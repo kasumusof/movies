@@ -1,6 +1,6 @@
 # movies
 
- [link go file](https://gomovyies.herokuapp.com/documentation/)
+ [link to file](https://gomovyies.herokuapp.com/documentation/)
 
  I was not able to finish the features
  However, I did justice to a few.
