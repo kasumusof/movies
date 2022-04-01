@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+    db:
+        image: postgres
+        container_name: movies_production_db
+        environment:
+            - .env
+        volumes:
+            - ./db:/var/lib/postgresql/data"
+        networks:
+            - internal
+    server:
+        container_name: mainapp
+        build: 
+            dockerfile: Dockerfile
+            context: ./
+        environment: 
+            - .env
+        expose:
+            - 8080
+        depends_on: 
+            - db
+        networks:
+            - internal
+        stdin_open: true
+volumes:
+    db:  
+    server:
+networks:
+    internal:
